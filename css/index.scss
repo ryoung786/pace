@@ -1,0 +1,37 @@
+:root {
+  font-size: 62.5%;
+  background-color: aquamarine;
+  body {
+    margin: auto;
+    max-width: 500px;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
+  }
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid navy;
+  h2 {
+    margin: 5px 0px;
+    font-family: "Permanent Marker", cursive;
+  }
+}
+input {
+  text-align: center;
+  font-family: "Roboto Mono", "Courier New", Courier, monospace;
+  padding: 1rem;
+  font-size: 2.5rem;
+}
+select {
+  text-align: center;
+  font-family: "Roboto Mono", "Courier New", Courier, monospace;
+  padding: 1rem;
+  font-size: 2rem;
+  background-color: white;
+}
+input:disabled {
+  background-color: red;
+}

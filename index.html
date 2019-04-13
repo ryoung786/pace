@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pace Calculator</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Permanent+Marker"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.scss" />
+    <script defer src="js/index.js"></script>
+  </head>
+  <body>
+    <form action="get">
+      <div class="section">
+        <h2>Distance</h2>
+        <button type="button" id="calc-distance" class="calc" data-metric="distance">
+          calc
+        </button>
+      </div>
+      <select name="distance-dropdown" id="distance-dropdown">
+        <option value="specify" selected="selected">Other</option>
+        <option value="mile">1 mile</option>
+        <option value="5k">5k</option>
+        <option value="10k">10k</option>
+        <option value="half">Half Marathon</option>
+        <option value="marathon">Marathon</option>
+      </select>
+      <input
+        type="number"
+        name="distance-specify"
+        id="distance-specify"
+        placeholder="distance"
+      />
+      <select name="distance-units" id="distance-units">
+        <option value="METER">meters</option>
+        <option value="KM">km</option>
+        <option value="MILE" selected="selected">miles</option>
+        <option value="YARD">yards</option>
+      </select>
+
+      <br />
+
+      <div class="section">
+        <h2>Pace</h2>
+        <button type="button" id="calc-pace" class="calc" data-metric="pace">calc</button>
+      </div>
+      <input
+        type="number"
+        name="pace-minutes"
+        id="pace-minutes"
+        min="0"
+        max="99"
+        placeholder="mm"
+        pattern="\d*"
+      />
+      :
+      <input
+        type="number"
+        name="pace-seconds"
+        id="pace-seconds"
+        step="1"
+        min="0"
+        max="59"
+        placeholder="ss"
+        pattern="\d*"
+      />
+      <select name="pace-units" id="pace-units">
+        <option value="METER">meters</option>
+        <option value="IM">km</option>
+        <option value="MILE" selected="selected">miles</option>
+        <option value="YARD">yards</option>
+      </select>
+
+      <br />
+
+      <div class="section">
+        <h2>Time</h2>
+        <button type="button" calc-time" class="calc" data-metric="time">calc</button>
+      </div>
+      <input
+        type="number"
+        name="time-hours"
+        id="time-hours"
+        min="0"
+        max="99"
+        placeholder="hh"
+        pattern="\d*"
+      />
+      :
+      <input
+        type="number"
+        name="time-minutes"
+        id="time-minutes"
+        min="0"
+        max="59"
+        placeholder="mm"
+        pattern="\d*"
+      />
+      :
+      <input
+        type="number"
+        name="time-seconds"
+        id="time-seconds"
+        min="0"
+        max="59"
+        placeholder="ss"
+        pattern="\d*"
+      />
+    </form>
+  </body>
+</html>
