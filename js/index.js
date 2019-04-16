@@ -14,7 +14,8 @@ const EL = {
     MIN: document.getElementById("time-minutes"),
     SEC: document.getElementById("time-seconds")
   },
-  CALC_BTN: document.getElementsByClassName("calc")
+  CALC_BTN: document.getElementsByClassName("calc"),
+  SELECTION: document.getElementById("selection")
 };
 const DISTANCES = {
   "400m": { dist: 400, unit: "METER" },
@@ -52,6 +53,7 @@ const CONVERSIONS = {
 };
 
 let model = {
+  selection: "distance",
   isDistanceEditable: false,
   distance: { dist: null, unit: null },
   pace: { seconds: null, unit: null },
@@ -73,11 +75,17 @@ document.addEventListener(
     if (e.target.matches(".calc")) {
       handleCalcClick(e.target.dataset.metric);
       return;
+    } else if (e.target.matches("header h2")) {
+      handleHeaderClick(e.target.dataset.metric);
+      return;
     }
   },
   false
 );
-
+function handleHeaderClick(metric) {
+  model.selection = metric;
+  render();
+}
 function handleCalcClick(metric) {
   if ("distance" === metric) {
     setAll();
@@ -137,6 +145,8 @@ function calculateTime() {
 }
 
 function render() {
+  EL.SELECTION.className = model.selection;
+
   const event = EL.DISTANCE.EVENT.selectedOptions[0].value;
   if (
     "specify" !== event &&
