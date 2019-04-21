@@ -1,24 +1,8 @@
 import { Time, Distance, Pace } from "./conversions";
+import { isNull } from "util";
 
-const EL = {
-  DISTANCE: {
-    EVENT: document.querySelector("distance-dropdown"),
-    RAW_INPUT: document.querySelector("distance-specify"),
-    UNIT: document.querySelector("distance-units")
-  },
-  PACE: {
-    MIN: document.querySelector("pace-minutes"),
-    SEC: document.querySelector("pace-seconds"),
-    UNIT: document.querySelector("pace-units")
-  },
-  TIME: {
-    HOUR: document.querySelector("time-hours"),
-    MIN: document.querySelector("time-minutes"),
-    SEC: document.querySelector("time-seconds")
-  },
-  CALC_BTN: document.querySelector("calc"),
-  SELECTION: document.getElementById("selection")
-};
+const _tabIndicator = document.getElementById("tab-indicator");
+
 const EVENTS = {
   "400m": { dist: 400, unit: "METER" },
   mile: { dist: 1, unit: "MILE" },
@@ -29,7 +13,8 @@ const EVENTS = {
 };
 
 let model = {
-  selection: "distance",
+  selected_tab: "distance",
+  scrollingTo: null,
   isDistanceEditable: false,
   distance: { dist: null, unit: null },
   pace: { seconds: null, unit: null },
@@ -43,6 +28,30 @@ let model = {
 //   setDistance();
 //   render();
 // };
+function handleScroll() {
+  const main = document.getElementsByTagName("main")[0];
+
+  if (main.scrollLeft === model.scrollingTo) {
+    // have we reached the destination?  if so, clear our scrollingTo
+    model.scrollingTo = null;
+    return;
+  } else if (!isNull(model.scrollingTo)) return;
+
+  let selection = "time";
+  if (main.scrollLeft < main.offsetWidth / 2) {
+    selection = "distance";
+  } else if (main.scrollLeft < main.offsetWidth * 1.5) {
+    selection = "pace";
+  }
+
+  if (selection !== model.selected_tab) {
+    model.selected_tab = selection;
+    render();
+  }
+}
+document.getElementsByTagName("main")[0].addEventListener("scroll", e => {
+  setTimeout(handleScroll, 250);
+});
 
 document.addEventListener(
   "click",
@@ -55,69 +64,24 @@ document.addEventListener(
   false
 );
 function handleHeaderClick(metric) {
-  model.selection = metric;
-  // render();
+  model.selected_tab = metric;
+  if ("distance" === metric.toLowerCase()) {
+    model.scrollingTo = 0;
+  } else if ("pace" === metric.toLowerCase()) {
+    model.scrollingTo = window.innerWidth;
+  } else if ("time" === metric.toLowerCase()) {
+    model.scrollingTo = window.innerWidth * 2;
+  }
+  render();
+  document
+    .getElementById(model.selected_tab.toLowerCase() + "-section")
+    .scrollIntoView({ behavior: "smooth" });
 }
-
-// function setPace() {
-//   model.pace.seconds = toSeconds(
-//     0,
-//     parseInt(EL.PACE.MIN.value) || 0,
-//     parseInt(EL.PACE.SEC.value) || 0
-//   );
-//   model.pace.unit = EL.PACE.UNIT.selectedOptions[0].value;
-// }
-// function setTime() {
-//   model.time = toSeconds(
-//     parseInt(EL.TIME.HOUR.value) || 0,
-//     parseInt(EL.TIME.MIN.value) || 0,
-//     parseInt(EL.TIME.SEC.value) || 0
-//   );
-// }
-// function setDistance() {
-//   const event = EL.DISTANCE.EVENT.selectedOptions[0].value;
-//   const unit = EL.DISTANCE.UNIT.selectedOptions[0].value;
-
-//   if ("specify" === event) {
-//     model.distance.dist = parseFloat(EL.DISTANCE.INPUT.value) || 0; // distance is whatever is typed into the input
-//     model.distance.unit = unit;
-//   } else {
-//     model.distance.dist = parseFloat(DISTANCES[event].dist) || 0;
-//     model.distance.unit = DISTANCES[event].unit;
-//   }
-//   model.isDistanceEditable = "specify" === event;
-// }
-
-// function render() {
-//   EL.SELECTION.className = model.selection;
-
-//   const event = EL.DISTANCE.EVENT.selectedOptions[0].value;
-//   if (
-//     "specify" !== event &&
-//     DISTANCES[event].dist !== +model.distance.dist.toFixed(2)
-//   ) {
-//     model.isDistanceEditable = true;
-//     EL.DISTANCE.EVENT.value = "specify";
-//   }
-//   EL.DISTANCE.INPUT.disabled = !model.isDistanceEditable;
-//   EL.DISTANCE.UNIT.disabled = !model.isDistanceEditable;
-//   EL.DISTANCE.INPUT.value = +model.distance.dist.toFixed(2);
-//   EL.DISTANCE.UNIT.value = model.distance.unit;
-
-//   const paceHMS = toHMS(model.pace.seconds);
-//   EL.PACE.MIN.value = paceHMS.MIN;
-//   EL.PACE.SEC.value = paceHMS.SEC;
-//   EL.PACE.UNIT.value = model.pace.unit;
-
-//   const timeHMS = toHMS(model.time);
-//   EL.TIME.HOUR.value = timeHMS.HOUR;
-//   EL.TIME.MIN.value = timeHMS.MIN;
-//   EL.TIME.SEC.value = timeHMS.SEC;
-// }
-// function setAll() {
-//   setDistance();
-//   setPace();
-//   setTime();
-// }
-// setAll();
-// render();
+function render() {
+  document.querySelectorAll("header>h2").forEach(e => {
+    e.classList.remove("selected");
+  });
+  document
+    .querySelector("header>h2." + model.selected_tab.toLowerCase())
+    .classList.add("selected");
+}
