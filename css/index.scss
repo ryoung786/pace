@@ -6,7 +6,7 @@
     height: 100vh;
     display: grid;
     grid-template-rows: 40px 10px 1fr;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "Permanent Marker", Arial, Helvetica, sans-serif;
     font-size: 2.5rem;
   }
 }
@@ -22,13 +22,13 @@ header {
     font-size: 2rem;
     font-weight: lighter;
   }
-  #distance {
+  #distance-btn {
     background-color: rgb(212, 129, 129);
   }
-  #pace {
+  #pace-btn {
     background-color: rgb(240, 238, 238);
   }
-  #time {
+  #time-btn {
     background-color: rgb(182, 182, 248);
   }
 }
@@ -55,22 +55,23 @@ header {
   transform: translateX(calc(100vw / 6 + 2 * 100vw / 3 - 10px));
   background-color: rgb(182, 182, 248);
 }
+
 main {
   grid-row-start: 2;
   grid-row-end: 4;
   grid-column: 1;
-}
-
-.section {
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid navy;
-  h2 {
-    margin: 5px 0px;
-    font-family: "Permanent Marker", cursive;
+  section {
+    width: 100vw;
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
   }
 }
+
 input {
   text-align: center;
   font-family: "Roboto Mono", "Courier New", Courier, monospace;
