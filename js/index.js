@@ -3,7 +3,7 @@ import { Time, Distance, Pace } from "./conversions";
 const EL = {
   DISTANCE: {
     EVENT: document.querySelector("distance-dropdown"),
-    INPUT: document.querySelector("distance-specify"),
+    RAW_INPUT: document.querySelector("distance-specify"),
     UNIT: document.querySelector("distance-units")
   },
   PACE: {
@@ -19,7 +19,7 @@ const EL = {
   CALC_BTN: document.querySelector("calc"),
   SELECTION: document.getElementById("selection")
 };
-const DISTANCES = {
+const EVENTS = {
   "400m": { dist: 400, unit: "METER" },
   mile: { dist: 1, unit: "MILE" },
   "5k": { dist: 5, unit: "KM" },
