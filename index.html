@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pace Calculator</title>
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono"
+      href="https://fonts.googleapis.com/css?family=Roboto:300|Roboto+Mono"
       rel="stylesheet"
     />
     <link
@@ -18,11 +18,18 @@
   </head>
   <body>
     <header>
-      <h2 id="distance-btn" data-metric="distance" class="distance selected">
-        Distance
-      </h2>
-      <h2 id="pace-btn" data-metric="pace" class="pace">Pace</h2>
-      <h2 id="time-btn" data-metric="time" class="time">Time</h2>
+      <div id="distance-btn" data-metric="distance" class="distance selected">
+        <h2>Distance</h2>
+        <div class="selection-indicator"></div>
+      </div>
+      <div id="pace-btn" data-metric="pace" class="pace">
+        <h2>Pace</h2>
+        <div class="selection-indicator"></div>
+      </div>
+      <div id="time-btn" data-metric="time" class="time">
+        <h2>Time</h2>
+        <div class="selection-indicator"></div>
+      </div>
     </header>
 
     <div id="space"></div>
@@ -205,9 +212,9 @@
           </div>
         </form>
       </section>
-      <section>
+      <!-- <section>
         <div style="width: 10px; height: 800px; background: red;"></div>
-      </section>
+      </section> -->
     </main>
   </body>
 </html>

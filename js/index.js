@@ -53,16 +53,14 @@ document.getElementsByTagName("main")[0].addEventListener("scroll", e => {
   setTimeout(handleScroll, 250);
 });
 
-document.addEventListener(
-  "click",
-  e => {
-    if (e.target.matches("header h2")) {
-      handleHeaderClick(e.target.dataset.metric);
-      return;
+document
+  .querySelector("header")
+  .addEventListener("click", function(e) {
+    const headerDiv = e.target.closest("header > div");
+    if (headerDiv) {
+      handleHeaderClick(headerDiv.dataset.metric);
     }
-  },
-  false
-);
+  });
 function handleHeaderClick(metric) {
   model.selected_tab = metric;
   if ("distance" === metric.toLowerCase()) {
@@ -76,14 +74,10 @@ function handleHeaderClick(metric) {
   document.getElementsByTagName("main")[0].scrollTo(model.scrollingTo, 0);
 }
 function render() {
-  document.querySelectorAll("header>h2").forEach(e => {
+  document.querySelectorAll("header > div").forEach(e => {
     e.classList.remove("selected");
   });
   document
-    .querySelector("header>h2." + model.selected_tab.toLowerCase())
+    .querySelector("header > div." + model.selected_tab.toLowerCase())
     .classList.add("selected");
 }
-
-document.querySelectorAll("h2::after").forEach(e => {
-  e.style.position = "relative";
-});
