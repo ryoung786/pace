@@ -73,9 +73,7 @@ function handleHeaderClick(metric) {
     model.scrollingTo = window.innerWidth * 2;
   }
   render();
-  document
-    .getElementById(model.selected_tab.toLowerCase() + "-section")
-    .scrollIntoView({ behavior: "smooth" });
+  document.getElementsByTagName("main")[0].scrollTo(model.scrollingTo, 0);
 }
 function render() {
   document.querySelectorAll("header>h2").forEach(e => {
@@ -85,3 +83,7 @@ function render() {
     .querySelector("header>h2." + model.selected_tab.toLowerCase())
     .classList.add("selected");
 }
+
+document.querySelectorAll("h2::after").forEach(e => {
+  e.style.position = "relative";
+});

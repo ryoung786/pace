@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pace Calculator</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono"
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Permanent+Marker"
       rel="stylesheet"
@@ -15,16 +18,18 @@
   </head>
   <body>
     <header>
-      <h2 id="distance-btn" data-metric="distance" class="distance selected">Distance</h2>
+      <h2 id="distance-btn" data-metric="distance" class="distance selected">
+        Distance
+      </h2>
       <h2 id="pace-btn" data-metric="pace" class="pace">Pace</h2>
       <h2 id="time-btn" data-metric="time" class="time">Time</h2>
     </header>
-    <!-- <div id="tab-indicator" class="distance"></div> -->
+
+    <div id="space"></div>
 
     <main>
       <section id="distance-section">
         <form action="get">
-
           <div class="pace">
             <input
               type="number"
@@ -98,7 +103,12 @@
               <option value="half">Half Marathon</option>
               <option value="marathon">Marathon</option>
             </select>
-            <input type="number" name="distance-specify" class="input" placeholder="distance" />
+            <input
+              type="number"
+              name="distance-specify"
+              class="input"
+              placeholder="distance"
+            />
             <select name="distance-units" class="units">
               <option value="METER">meters</option>
               <option value="KM">km</option>
@@ -106,13 +116,37 @@
               <option value="YARD">yards</option>
             </select>
           </div>
-      
+
           <div class="time">
-            <input type="number" name="time-hours" class="hours" min="0" max="99" placeholder="hh" pattern="\d*" />
+            <input
+              type="number"
+              name="time-hours"
+              class="hours"
+              min="0"
+              max="99"
+              placeholder="hh"
+              pattern="\d*"
+            />
             :
-            <input type="number" name="time-minutes" class="minutes" min="0" max="59" placeholder="mm" pattern="\d*" />
+            <input
+              type="number"
+              name="time-minutes"
+              class="minutes"
+              min="0"
+              max="59"
+              placeholder="mm"
+              pattern="\d*"
+            />
             :
-            <input type="number" name="time-seconds" class="seconds" min="0" max="59" placeholder="ss" pattern="\d*" />
+            <input
+              type="number"
+              name="time-seconds"
+              class="seconds"
+              min="0"
+              max="59"
+              placeholder="ss"
+              pattern="\d*"
+            />
           </div>
         </form>
       </section>
@@ -127,7 +161,12 @@
               <option value="half">Half Marathon</option>
               <option value="marathon">Marathon</option>
             </select>
-            <input type="number" name="distance-specify" class="input" placeholder="distance" />
+            <input
+              type="number"
+              name="distance-specify"
+              class="input"
+              placeholder="distance"
+            />
             <select name="distance-units" class="units">
               <option value="METER">meters</option>
               <option value="KM">km</option>
@@ -135,11 +174,28 @@
               <option value="YARD">yards</option>
             </select>
           </div>
-        
+
           <div class="pace">
-            <input type="number" name="pace-minutes" class="minutes" min="0" max="99" placeholder="mm" pattern="\d*" />
+            <input
+              type="number"
+              name="pace-minutes"
+              class="minutes"
+              min="0"
+              max="99"
+              placeholder="mm"
+              pattern="\d*"
+            />
             :
-            <input type="number" name="pace-seconds" class="seconds" step="1" min="0" max="59" placeholder="ss" pattern="\d*" />
+            <input
+              type="number"
+              name="pace-seconds"
+              class="seconds"
+              step="1"
+              min="0"
+              max="59"
+              placeholder="ss"
+              pattern="\d*"
+            />
             <select name="pace-units" class="units">
               <option value="METER">meters</option>
               <option value="KM">km</option>
@@ -148,7 +204,10 @@
             </select>
           </div>
         </form>
-    </section>
+      </section>
+      <section>
+        <div style="width: 10px; height: 800px; background: red;"></div>
+      </section>
     </main>
   </body>
 </html>
