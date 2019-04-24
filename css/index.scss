@@ -66,11 +66,19 @@ main {
   display: flex;
   section {
     width: 100vw;
+    box-sizing: border-box;
+    padding: 30px;
     scroll-snap-align: start;
     scroll-snap-stop: normal;
     flex-shrink: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .computed {
+    padding: 20px;
+    font-size: 5rem;
+    font-family: "Roboto Mono", "Courier New", Courier, monospace;
   }
 }
 

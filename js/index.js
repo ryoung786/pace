@@ -1,7 +1,4 @@
-import { Time, Distance, Pace } from "./conversions";
-import { isNull } from "util";
-
-const _tabIndicator = document.getElementById("tab-indicator");
+import { Time, Distance, Pace, Units as u } from "./conversions";
 
 const EVENTS = {
   "400m": { dist: 400, unit: "METER" },
@@ -15,19 +12,16 @@ const EVENTS = {
 let model = {
   selected_tab: "distance",
   scrollingTo: null,
-  isDistanceEditable: false,
-  distance: { dist: null, unit: null },
-  pace: { seconds: null, unit: null },
-  time: null // seconds
+  distance: Distance.fromEvent(EVENTS.marathon),
+  time: new Time(3, 0, 0),
+  pace: Distance.fromEvent(EVENTS.marathon).calculatePace(
+    new Time(3, 0, 0),
+    u.MILE
+  )
 };
+let scrolling = false;
 
-// EL.DISTANCE.EVENT.onchange = e => {
-//   // if pre-set event, overwrite the distance and unit inputs
-//   // and disable them
-//   // otherwise, enable them
-//   setDistance();
-//   render();
-// };
+// #region scrolling
 function handleScroll() {
   const main = document.getElementsByTagName("main")[0];
 
@@ -35,7 +29,7 @@ function handleScroll() {
     // have we reached the destination?  if so, clear our scrollingTo
     model.scrollingTo = null;
     return;
-  } else if (!isNull(model.scrollingTo)) return;
+  } else if (null !== model.scrollingTo) return;
 
   let selection = "time";
   if (main.scrollLeft < main.offsetWidth / 2) {
@@ -50,17 +44,22 @@ function handleScroll() {
   }
 }
 document.getElementsByTagName("main")[0].addEventListener("scroll", e => {
-  setTimeout(handleScroll, 250);
+  if (!scrolling) {
+    window.requestAnimationFrame(function() {
+      handleScroll();
+      scrolling = false;
+    });
+
+    scrolling = true;
+  }
 });
 
-document
-  .querySelector("header")
-  .addEventListener("click", function(e) {
-    const headerDiv = e.target.closest("header > div");
-    if (headerDiv) {
-      handleHeaderClick(headerDiv.dataset.metric);
-    }
-  });
+document.querySelector("header").addEventListener("click", function(e) {
+  const headerDiv = e.target.closest("header > div");
+  if (headerDiv) {
+    handleHeaderClick(headerDiv.dataset.metric);
+  }
+});
 function handleHeaderClick(metric) {
   model.selected_tab = metric;
   if ("distance" === metric.toLowerCase()) {
@@ -73,11 +72,71 @@ function handleHeaderClick(metric) {
   render();
   document.getElementsByTagName("main")[0].scrollTo(model.scrollingTo, 0);
 }
-function render() {
-  document.querySelectorAll("header > div").forEach(e => {
-    e.classList.remove("selected");
-  });
-  document
-    .querySelector("header > div." + model.selected_tab.toLowerCase())
-    .classList.add("selected");
+// #endregion scrolling
+function formatTimeInput(evt) {
+  const input = evt.target;
+  input.value = Math.floor(input.value);
 }
+
+document.querySelectorAll("input").forEach(input => {
+  input.onfocus = e => {
+    e.target.select();
+  };
+  input.onblur = formatTimeInput;
+});
+
+function render() {
+  renderSelectedTab();
+  renderInputFields();
+  renderComputed();
+
+  function renderSelectedTab() {
+    document.querySelectorAll("header > div").forEach(e => {
+      e.classList.remove("selected");
+    });
+    document
+      .querySelector("header > div." + model.selected_tab.toLowerCase())
+      .classList.add("selected");
+  }
+  function renderComputed() {
+    document.querySelector(
+      "#distance-section .computed"
+    ).textContent = model.distance.displayAsString();
+    document.querySelector(
+      "#pace-section .computed"
+    ).textContent = model.pace.displayAsString();
+    document.querySelector(
+      "#time-section .computed"
+    ).textContent = model.time.displayAsString();
+  }
+  function renderInputFields() {
+    const paceDisplay = model.pace.display();
+    const timeDisplay = model.time.display();
+    document.querySelectorAll("form .pace input.minutes").forEach(e => {
+      e.value = paceDisplay.MIN;
+    });
+    document.querySelectorAll("form .pace input.seconds").forEach(e => {
+      e.value = paceDisplay.SEC;
+    });
+    document.querySelectorAll("form .pace select.units").forEach(e => {
+      e.value = model.pace.unit;
+    });
+    document.querySelectorAll("form .time input.hours").forEach(e => {
+      e.value = timeDisplay.HOUR;
+    });
+    document.querySelectorAll("form .time input.minutes").forEach(e => {
+      e.value = timeDisplay.MIN;
+    });
+    document.querySelectorAll("form .time input.seconds").forEach(e => {
+      e.value = timeDisplay.SEC;
+    });
+    document.querySelectorAll("form .distance input.input").forEach(e => {
+      e.value = model.distance.display().distance;
+    });
+    document.querySelectorAll("form .distance select.units").forEach(e => {
+      e.value = model.distance.unit;
+    });
+  }
+}
+
+render();

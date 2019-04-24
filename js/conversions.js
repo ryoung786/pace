@@ -44,9 +44,12 @@ function toTotalSeconds(hours, minutes, seconds) {
 }
 function displayHMS(hours, minutes, seconds) {
   return {
-    HOUR: ("00" + hours).slice(-2),
-    MIN: ("00" + minutes).slice(-2),
-    SEC: ("00" + seconds).slice(-2)
+    HOUR: hours === 0 ? "" : ("00" + hours).slice(-2),
+    MIN: hours === 0 && minutes === 0 ? "" : ("00" + minutes).slice(-2),
+    SEC:
+      hours === 0 && minutes === 0 && seconds === 0
+        ? ""
+        : ("00" + seconds).slice(-2)
   };
 }
 
@@ -57,6 +60,14 @@ export class Distance {
   }
   display() {
     return new Distance(Math.round(100 * this.distance) / 100, this.unit);
+  }
+  displayAsString() {
+    const d = Math.round(100 * this.distance) / 100;
+    const u = { METER: "m", MILE: "miles", KM: "km", YARD: "yards" }[this.unit];
+    return `${d} ${u}`;
+  }
+  static fromEvent(event) {
+    return new Distance(event.dist, event.unit);
   }
   toUnit(unit) {
     if (unit === Units.MILE) {
@@ -120,6 +131,16 @@ export class Pace {
   display() {
     return displayHMS(this.hours, this.minutes, this.seconds);
   }
+  displayAsString() {
+    const p = this.display();
+    let arr = [];
+    if (p.HOUR) arr.push(p.HOUR);
+    if (p.MIN) arr.push(p.MIN);
+    else arr.push("0");
+    arr.push(p.SEC);
+    if (arr[0].startsWith("0")) arr[0] = arr[0].slice(1);
+    return `${arr.join(":")} / ${this.unit}`;
+  }
   calculateTime(distance) {
     let d = distance.toUnit(this.unit);
     return Time.fromTotalSeconds(this.toSeconds() * d.distance);
@@ -145,6 +166,16 @@ export class Time {
   }
   display() {
     return displayHMS(this.hours, this.minutes, this.seconds);
+  }
+  displayAsString() {
+    const p = this.display();
+    let arr = [];
+    if (p.HOUR) arr.push(p.HOUR);
+    if (p.MIN) arr.push(p.MIN);
+    else arr.push("0");
+    arr.push(p.SEC);
+    if (arr[0].startsWith("0")) arr[0] = arr[0].slice(1);
+    return arr.join(":");
   }
   calculateDistance(pace, units) {
     let d = new Distance(this.toSeconds() / pace.toSeconds(), pace.unit);

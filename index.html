@@ -57,12 +57,12 @@
               max="59"
               placeholder="ss"
               pattern="\d*"
-            />
+            /> /
             <select name="pace-units" class="units">
-              <option value="METER">meters</option>
+              <option value="METER">meter</option>
               <option value="KM">km</option>
-              <option value="MILE" selected="selected">miles</option>
-              <option value="YARD">yards</option>
+              <option value="MILE" selected="selected">mile</option>
+              <option value="YARD">yard</option>
             </select>
           </div>
 
@@ -98,17 +98,20 @@
             />
           </div>
         </form>
+        <div class="computed">
+          5000<span class="units">m</span>
+        </div>
       </section>
       <section id="pace-section">
         <form action="get">
           <div class="distance">
             <select name="distance-dropdown" class="event">
-              <option value="specify" selected="selected">Other</option>
+              <option value="specify">Other</option>
               <option value="mile">1 mile</option>
               <option value="5k">5k</option>
               <option value="10k">10k</option>
               <option value="half">Half Marathon</option>
-              <option value="marathon">Marathon</option>
+              <option value="marathon" selected="selected">Marathon</option>
             </select>
             <input
               type="number"
@@ -156,17 +159,20 @@
             />
           </div>
         </form>
+        <div class="computed">
+          5:43 / mile
+        </div>
       </section>
       <section id="time-section">
         <form action="get">
           <div class="distance">
             <select name="distance-dropdown" class="event">
-              <option value="specify" selected="selected">Other</option>
+              <option value="specify">Other</option>
               <option value="mile">1 mile</option>
               <option value="5k">5k</option>
               <option value="10k">10k</option>
               <option value="half">Half Marathon</option>
-              <option value="marathon">Marathon</option>
+              <option value="marathon" selected="selected">Marathon</option>
             </select>
             <input
               type="number"
@@ -204,13 +210,16 @@
               pattern="\d*"
             />
             <select name="pace-units" class="units">
-              <option value="METER">meters</option>
+              <option value="METER">meter</option>
               <option value="KM">km</option>
-              <option value="MILE" selected="selected">miles</option>
-              <option value="YARD">yards</option>
+              <option value="MILE" selected="selected">mile</option>
+              <option value="YARD">yard</option>
             </select>
           </div>
         </form>
+        <div class="computed">
+          3:00:00
+        </div>
       </section>
       <!-- <section>
         <div style="width: 10px; height: 800px; background: red;"></div>

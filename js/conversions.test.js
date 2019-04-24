@@ -64,3 +64,19 @@ test("Calculate Distance 5K", () => {
   let d = p.calculateDistance(t, Units.METER);
   expect(d.distance).toBe(5002.37);
 });
+
+test("can i do this", () => {
+  let d = Distance.fromEvent({dist: 26.2, unit: Units.MILE});
+  expect(d.distance).toBe(26.2);
+});
+
+test("displayHMS", () => {
+  let d = new Time(0, 5, 33).display();
+  expect(d.HOUR).toBe("");
+  expect(d.MIN).toBe("05");
+  expect(d.SEC).toBe("33");
+  d = new Time(0, 0, 33).display();
+  expect(d.HOUR).toBe("");
+  expect(d.MIN).toBe("");
+  expect(d.SEC).toBe("33");
+});
