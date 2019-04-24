@@ -139,7 +139,7 @@ export class Pace {
     else arr.push("0");
     arr.push(p.SEC);
     if (arr[0].startsWith("0")) arr[0] = arr[0].slice(1);
-    return `${arr.join(":")} / ${this.unit}`;
+    return `${arr.join(":")} / ${this.unit.toLowerCase()}`;
   }
   calculateTime(distance) {
     let d = distance.toUnit(this.unit);

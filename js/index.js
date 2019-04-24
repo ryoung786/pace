@@ -73,16 +73,38 @@ function handleHeaderClick(metric) {
   document.getElementsByTagName("main")[0].scrollTo(model.scrollingTo, 0);
 }
 // #endregion scrolling
-function formatTimeInput(evt) {
-  const input = evt.target;
-  input.value = Math.floor(input.value);
-}
 
-document.querySelectorAll("input").forEach(input => {
-  input.onfocus = e => {
+document.addEventListener("change", e => {
+  const sectionID = e.target.closest("section").id;
+  const form = e.target.closest("form");
+  const changedSection = e.target.closest("form > div").dataset.section;
+  const changedField = e.target.dataset.field;
+
+  if ("event" === changedField) {
+    model.distance = Distance.fromEvent(EVENTS[e.target.value]);
+  } else {
+    model[changedSection][changedField] =
+      "INPUT" === e.target.tagName
+        ? parseFloat(e.target.value) || 0
+        : e.target.value;
+  }
+  if (sectionID.startsWith("distance")) {
+    model.distance = model.pace.calculateDistance(
+      model.time,
+      model.distance.unit
+    );
+  } else if (sectionID.startsWith("pace")) {
+    model.pace = model.distance.calculatePace(model.time, model.pace.unit);
+  } else if (sectionID.startsWith("time")) {
+    model.time = model.distance.calculateTime(model.pace);
+  }
+  render();
+});
+
+document.addEventListener("focusin", e => {
+  if (e.target.matches("input")) {
     e.target.select();
-  };
-  input.onblur = formatTimeInput;
+  }
 });
 
 function render() {

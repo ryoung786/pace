@@ -37,11 +37,12 @@
     <main>
       <section id="distance-section">
         <form action="get">
-          <div class="pace">
+          <div class="pace" data-section="pace">
             <input
               type="number"
               name="pace-minutes"
               class="minutes"
+              data-field="minutes"
               min="0"
               max="99"
               placeholder="mm"
@@ -52,13 +53,14 @@
               type="number"
               name="pace-seconds"
               class="seconds"
+              data-field="seconds"
               step="1"
               min="0"
               max="59"
               placeholder="ss"
               pattern="\d*"
             /> /
-            <select name="pace-units" class="units">
+            <select name="pace-units" class="units" data-field="unit">
               <option value="METER">meter</option>
               <option value="KM">km</option>
               <option value="MILE" selected="selected">mile</option>
@@ -66,11 +68,12 @@
             </select>
           </div>
 
-          <div class="time">
+          <div class="time" data-section="time">
             <input
               type="number"
               name="time-hours"
               class="hours"
+              data-field="hours"
               min="0"
               max="99"
               placeholder="hh"
@@ -81,6 +84,7 @@
               type="number"
               name="time-minutes"
               class="minutes"
+              data-field="minutes"
               min="0"
               max="59"
               placeholder="mm"
@@ -91,6 +95,7 @@
               type="number"
               name="time-seconds"
               class="seconds"
+              data-field="seconds"
               min="0"
               max="59"
               placeholder="ss"
@@ -104,8 +109,8 @@
       </section>
       <section id="pace-section">
         <form action="get">
-          <div class="distance">
-            <select name="distance-dropdown" class="event">
+          <div class="distance" data-section="distance">
+            <select name="distance-dropdown" class="event" data-field="event">
               <option value="specify">Other</option>
               <option value="mile">1 mile</option>
               <option value="5k">5k</option>
@@ -117,9 +122,10 @@
               type="number"
               name="distance-specify"
               class="input"
+              data-field="distance"
               placeholder="distance"
             />
-            <select name="distance-units" class="units">
+            <select name="distance-units" class="units" data-field="unit">
               <option value="METER">meters</option>
               <option value="KM">km</option>
               <option value="MILE" selected="selected">miles</option>
@@ -127,11 +133,12 @@
             </select>
           </div>
 
-          <div class="time">
+          <div class="time" data-section="time">
             <input
               type="number"
               name="time-hours"
               class="hours"
+              data-field="hours"
               min="0"
               max="99"
               placeholder="hh"
@@ -142,6 +149,7 @@
               type="number"
               name="time-minutes"
               class="minutes"
+              data-field="minutes"
               min="0"
               max="59"
               placeholder="mm"
@@ -152,6 +160,7 @@
               type="number"
               name="time-seconds"
               class="seconds"
+              data-field="seconds"
               min="0"
               max="59"
               placeholder="ss"
@@ -165,8 +174,8 @@
       </section>
       <section id="time-section">
         <form action="get">
-          <div class="distance">
-            <select name="distance-dropdown" class="event">
+          <div class="distance" data-section="distance">
+            <select name="distance-dropdown" class="event" data-field="event">
               <option value="specify">Other</option>
               <option value="mile">1 mile</option>
               <option value="5k">5k</option>
@@ -178,9 +187,10 @@
               type="number"
               name="distance-specify"
               class="input"
+              data-field="distance"
               placeholder="distance"
             />
-            <select name="distance-units" class="units">
+            <select name="distance-units" class="units" data-field="unit">
               <option value="METER">meters</option>
               <option value="KM">km</option>
               <option value="MILE" selected="selected">miles</option>
@@ -188,11 +198,12 @@
             </select>
           </div>
 
-          <div class="pace">
+          <div class="pace" data-section="pace">
             <input
               type="number"
               name="pace-minutes"
               class="minutes"
+              data-field="minutes"
               min="0"
               max="99"
               placeholder="mm"
@@ -203,13 +214,14 @@
               type="number"
               name="pace-seconds"
               class="seconds"
+              data-field="seconds"
               step="1"
               min="0"
               max="59"
               placeholder="ss"
               pattern="\d*"
             />
-            <select name="pace-units" class="units">
+            <select name="pace-units" class="units" data-field="unit">
               <option value="METER">meter</option>
               <option value="KM">km</option>
               <option value="MILE" selected="selected">mile</option>
