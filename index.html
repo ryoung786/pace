@@ -102,9 +102,17 @@
               pattern="\d*"
             />
           </div>
+
+          <button>go</button>
         </form>
         <div class="computed">
-          5000<span class="units">m</span>
+          <span>10 miles</span>
+          <select name="distance-units" class="units" data-metric="distance">
+            <option value="METER">meters</option>
+            <option value="KM">km</option>
+            <option value="MILE" selected="selected">miles</option>
+            <option value="YARD">yards</option>
+          </select>
         </div>
       </section>
       <section id="pace-section">
@@ -124,6 +132,8 @@
               class="input"
               data-field="distance"
               placeholder="distance"
+              min="0"
+              step=".001"
             />
             <select name="distance-units" class="units" data-field="unit">
               <option value="METER">meters</option>
@@ -167,9 +177,17 @@
               pattern="\d*"
             />
           </div>
+          
+          <button>go</button>
         </form>
         <div class="computed">
-          5:43 / mile
+          <span>5:43 / mile</span>
+          <select name="distance-units" class="units" data-metric="pace">
+            <option value="METER">meters</option>
+            <option value="KM">km</option>
+            <option value="MILE" selected="selected">miles</option>
+            <option value="YARD">yards</option>
+          </select>
         </div>
       </section>
       <section id="time-section">
@@ -189,6 +207,8 @@
               class="input"
               data-field="distance"
               placeholder="distance"
+              min="0"
+              step=".001"
             />
             <select name="distance-units" class="units" data-field="unit">
               <option value="METER">meters</option>
@@ -228,9 +248,11 @@
               <option value="YARD">yard</option>
             </select>
           </div>
+
+          <button>go</button>
         </form>
         <div class="computed">
-          3:00:00
+          <span>3:00:00</span>
         </div>
       </section>
       <!-- <section>

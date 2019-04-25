@@ -40,9 +40,12 @@ function toHMS(totalSeconds) {
   return { hours: h, minutes: m, seconds: s };
 }
 function toTotalSeconds(hours, minutes, seconds) {
-  return 60 * 60 * hours + 60 * minutes + seconds;
+  return 60 * 60 * hours + 60 * minutes + (parseFloat(seconds) || 0);
 }
 function displayHMS(hours, minutes, seconds) {
+  hours = parseFloat(hours) || 0;
+  minutes = parseFloat(minutes) || 0;
+  seconds = parseFloat(seconds) || 0;
   return {
     HOUR: hours === 0 ? "" : ("00" + hours).slice(-2),
     MIN: hours === 0 && minutes === 0 ? "" : ("00" + minutes).slice(-2),

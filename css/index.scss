@@ -110,8 +110,13 @@ main {
 input {
   text-align: center;
   font-family: "Roboto Mono", "Courier New", Courier, monospace;
-  padding: 1rem;
+  padding: 0.4rem;
   font-size: 2.5rem;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 select {
   text-align: center;
@@ -119,6 +124,20 @@ select {
   padding: 1rem;
   font-size: 2rem;
   background-color: white;
+}
+form > div:first-child {
+  margin-bottom: 24px;
+}
+form .distance {
+  margin-bottom: 24px;
+  .event {
+    display: block;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+  .input {
+    width: 50%;
+  }
 }
 input:disabled {
   background-color: red;

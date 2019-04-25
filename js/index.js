@@ -74,31 +74,77 @@ function handleHeaderClick(metric) {
 }
 // #endregion scrolling
 
-document.addEventListener("change", e => {
+document.addEventListener("submit", e => {
+  //#region const sectionID = e.target.closest("section").id;
+  // const form = e.target.closest("form");
+  // const changedSection = e.target.closest("form > div").dataset.section;
+  // const changedField = e.target.dataset.field;
+
+  // if ("event" === changedField) {
+  //   model.distance = Distance.fromEvent(EVENTS[e.target.value]);
+  // } else {
+  //   model[changedSection][changedField] =
+  //     "INPUT" === e.target.tagName
+  //       ? parseFloat(e.target.value) || 0
+  //       : e.target.value;
+  // }
+  // if (sectionID.startsWith("distance")) {
+  //   model.distance = model.pace.calculateDistance(
+  //     model.time,
+  //     model.distance.unit
+  //   );
+  // } else if (sectionID.startsWith("pace")) {
+  //   model.pace = model.distance.calculatePace(model.time, model.pace.unit);
+  // } else if (sectionID.startsWith("time")) {
+  //   model.time = model.distance.calculateTime(model.pace);
+  // }
+  //#endregion
+  e.preventDefault();
   const sectionID = e.target.closest("section").id;
   const form = e.target.closest("form");
-  const changedSection = e.target.closest("form > div").dataset.section;
-  const changedField = e.target.dataset.field;
-
-  if ("event" === changedField) {
-    model.distance = Distance.fromEvent(EVENTS[e.target.value]);
-  } else {
-    model[changedSection][changedField] =
-      "INPUT" === e.target.tagName
-        ? parseFloat(e.target.value) || 0
-        : e.target.value;
-  }
-  if (sectionID.startsWith("distance")) {
-    model.distance = model.pace.calculateDistance(
-      model.time,
-      model.distance.unit
+  if (sectionID.match(/distance|pace/)) {
+    model.time = new Time(
+      form.querySelector(".time .hours").value,
+      form.querySelector(".time .minutes").value,
+      form.querySelector(".time .seconds").value
     );
-  } else if (sectionID.startsWith("pace")) {
-    model.pace = model.distance.calculatePace(model.time, model.pace.unit);
-  } else if (sectionID.startsWith("time")) {
-    model.time = model.distance.calculateTime(model.pace);
   }
+  if (sectionID.match(/distance|time/)) {
+    model.pace = new Pace(
+      0,
+      form.querySelector(".pace .minutes").value,
+      form.querySelector(".pace .seconds").value,
+      form.querySelector(".pace .units").value
+    );
+  }
+  if (sectionID.match(/time|pace/)) {
+    model.distance = new Distance(
+      form.querySelector(".distance .input").value,
+      form.querySelector(".distance .units").value
+    );
+  }
+
+  if (sectionID.startsWith("distance")) {
+    model.distance = model.pace.calculateDistance(model.time, model.pace.unit);
+  } else if (sectionID.startsWith("pace")) {
+    model.pace = model.distance.calculatePace(model.time, model.distance.unit);
+  } else if (sectionID.startsWith("time")) {
+    model.time = model.pace.calculateTime(model.distance);
+  }
+
   render();
+});
+
+document.addEventListener("change", e => {
+  if (e.target.matches(".computed select")) {
+    const metric = e.target.dataset.metric;
+    if ("distance" === metric) {
+      model.distance = model.pace.calculateDistance(model.time, e.target.value);
+    } else if ("pace" === metric) {
+      model.pace = model.distance.calculatePace(model.time, e.target.value);
+    }
+    render();
+  }
 });
 
 document.addEventListener("focusin", e => {
@@ -122,13 +168,13 @@ function render() {
   }
   function renderComputed() {
     document.querySelector(
-      "#distance-section .computed"
+      "#distance-section .computed span"
     ).textContent = model.distance.displayAsString();
     document.querySelector(
-      "#pace-section .computed"
+      "#pace-section .computed span"
     ).textContent = model.pace.displayAsString();
     document.querySelector(
-      "#time-section .computed"
+      "#time-section .computed span"
     ).textContent = model.time.displayAsString();
   }
   function renderInputFields() {
