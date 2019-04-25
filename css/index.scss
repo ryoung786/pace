@@ -7,6 +7,26 @@
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     font-size: 2.5rem;
   }
+  body:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    display: block;
+    background-image: url("../images/bkmile.jpg");
+    background-size: cover;
+    background-position-x: center;
+    width: 100%;
+    height: 100%;
+
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+  }
 }
 
 header {
@@ -17,6 +37,8 @@ header {
   position: fixed;
   z-index: 1;
   top: 0px;
+  background: rgba(255, 255, 255, 0.85);
+  // background: white;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   > div {
     width: 33.3333333vw;
@@ -79,6 +101,8 @@ main {
     padding: 20px;
     font-size: 5rem;
     font-family: "Roboto Mono", "Courier New", Courier, monospace;
+    color: white;
+    text-shadow: 1px 1px 2px black;
   }
 }
 
