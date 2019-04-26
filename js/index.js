@@ -75,30 +75,6 @@ function handleHeaderClick(metric) {
 // #endregion scrolling
 
 document.addEventListener("submit", e => {
-  //#region const sectionID = e.target.closest("section").id;
-  // const form = e.target.closest("form");
-  // const changedSection = e.target.closest("form > div").dataset.section;
-  // const changedField = e.target.dataset.field;
-
-  // if ("event" === changedField) {
-  //   model.distance = Distance.fromEvent(EVENTS[e.target.value]);
-  // } else {
-  //   model[changedSection][changedField] =
-  //     "INPUT" === e.target.tagName
-  //       ? parseFloat(e.target.value) || 0
-  //       : e.target.value;
-  // }
-  // if (sectionID.startsWith("distance")) {
-  //   model.distance = model.pace.calculateDistance(
-  //     model.time,
-  //     model.distance.unit
-  //   );
-  // } else if (sectionID.startsWith("pace")) {
-  //   model.pace = model.distance.calculatePace(model.time, model.pace.unit);
-  // } else if (sectionID.startsWith("time")) {
-  //   model.time = model.distance.calculateTime(model.pace);
-  // }
-  //#endregion
   e.preventDefault();
   const sectionID = e.target.closest("section").id;
   const form = e.target.closest("form");
@@ -143,6 +119,9 @@ document.addEventListener("change", e => {
     } else if ("pace" === metric) {
       model.pace = model.distance.calculatePace(model.time, e.target.value);
     }
+    render();
+  } else if (e.target.matches(".distance select")) {
+    model.distance = Distance.fromEvent(EVENTS[e.target.value]);
     render();
   }
 });

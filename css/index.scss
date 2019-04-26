@@ -100,14 +100,13 @@ main {
     flex-direction: column;
     align-items: center;
     .pace {
-      display: inline-flex;
+      display: flex;
       span {
         align-self: center;
       }
     }
   }
   .computed {
-    padding: 20px;
     font-size: 5rem;
     font-family: "Roboto Mono", "Courier New", Courier, monospace;
     color: white;
@@ -144,6 +143,7 @@ form {
   display: flex;
   flex-direction: column;
   max-width: 450px;
+  margin-bottom: 4.8rem;
   button {
     align-self: center;
     font-size: 1.6rem;
@@ -191,12 +191,10 @@ form .distance {
   }
 }
 .distance-and-units {
-  display: flex;
+  display: inline-flex;
   input {
     width: 70%;
-  }
-  select {
-    max-width: 30%;
+    margin-right: 1.6rem;
   }
 }
 input:disabled {
