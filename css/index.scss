@@ -4,7 +4,7 @@
   body {
     margin: 0;
     height: 100%;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "Roboto Mono", "Courier New", Courier, monospace;
     font-size: 2.5rem;
   }
   body:before {
@@ -16,7 +16,8 @@
     padding: 10px;
 
     display: block;
-    background-image: url("../images/bkmile.jpg");
+    background-image: url("../images/bkmile_thumb.jpg");
+    background-color: #999;
     background-size: cover;
     background-position-x: center;
     width: 100%;
@@ -26,12 +27,13 @@
     -moz-filter: blur(5px);
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
-    filter: blur(5px);
+    filter: blur(7px);
   }
 }
 
 header {
   cursor: pointer;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-tap-highlight-color: transparent;
   display: flex;
   height: 40px;
@@ -97,6 +99,12 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    .pace {
+      display: inline-flex;
+      span {
+        align-self: center;
+      }
+    }
   }
   .computed {
     padding: 20px;
@@ -104,6 +112,12 @@ main {
     font-family: "Roboto Mono", "Courier New", Courier, monospace;
     color: white;
     text-shadow: 1px 1px 2px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    span {
+      text-align: center;
+    }
   }
 }
 
@@ -124,9 +138,46 @@ select {
   padding: 1rem;
   font-size: 2rem;
   background-color: white;
+  border: none;
 }
-form > div:first-child {
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  button {
+    align-self: center;
+    font-size: 1.6rem;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    border-radius: 4px;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.75;
+    background: rgb(1, 168, 168);
+    padding: 6px 16px;
+    color: white;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    outline: none;
+  }
+  button:hover {
+    background: rgba(1, 135, 134, 1);
+  }
+  button:active {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+}
+form > div {
   margin-bottom: 24px;
+  span {
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    padding: 0 0.4rem;
+  }
 }
 form .distance {
   margin-bottom: 24px;
@@ -137,6 +188,15 @@ form .distance {
   }
   .input {
     width: 50%;
+  }
+}
+.distance-and-units {
+  display: flex;
+  input {
+    width: 70%;
+  }
+  select {
+    max-width: 30%;
   }
 }
 input:disabled {

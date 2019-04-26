@@ -48,7 +48,7 @@
               placeholder="mm"
               pattern="\d*"
             />
-            :
+            <span>:</span>
             <input
               type="number"
               name="pace-seconds"
@@ -59,7 +59,8 @@
               max="59"
               placeholder="ss"
               pattern="\d*"
-            /> /
+            />
+            <span>/</span>
             <select name="pace-units" class="units" data-field="unit">
               <option value="METER">meter</option>
               <option value="KM">km</option>
@@ -78,9 +79,7 @@
               max="99"
               placeholder="hh"
               pattern="\d*"
-            />
-            :
-            <input
+            /><span>:</span><input
               type="number"
               name="time-minutes"
               class="minutes"
@@ -89,9 +88,7 @@
               max="59"
               placeholder="mm"
               pattern="\d*"
-            />
-            :
-            <input
+            /><span>:</span><input
               type="number"
               name="time-seconds"
               class="seconds"
@@ -126,21 +123,23 @@
               <option value="half">Half Marathon</option>
               <option value="marathon" selected="selected">Marathon</option>
             </select>
-            <input
-              type="number"
-              name="distance-specify"
-              class="input"
-              data-field="distance"
-              placeholder="distance"
-              min="0"
-              step=".001"
-            />
-            <select name="distance-units" class="units" data-field="unit">
-              <option value="METER">meters</option>
-              <option value="KM">km</option>
-              <option value="MILE" selected="selected">miles</option>
-              <option value="YARD">yards</option>
-            </select>
+            <div class="distance-and-units">
+              <input
+                type="number"
+                name="distance-specify"
+                class="input"
+                data-field="distance"
+                placeholder="distance"
+                min="0"
+                step=".001"
+              />
+              <select name="distance-units" class="units" data-field="unit">
+                <option value="METER">meters</option>
+                <option value="KM">km</option>
+                <option value="MILE" selected="selected">miles</option>
+                <option value="YARD">yards</option>
+              </select>
+            </div>
           </div>
 
           <div class="time" data-section="time">
@@ -153,9 +152,7 @@
               max="99"
               placeholder="hh"
               pattern="\d*"
-            />
-            :
-            <input
+            /><span>:</span><input
               type="number"
               name="time-minutes"
               class="minutes"
@@ -164,9 +161,7 @@
               max="59"
               placeholder="mm"
               pattern="\d*"
-            />
-            :
-            <input
+            /><span>:</span><input
               type="number"
               name="time-seconds"
               class="seconds"
@@ -201,21 +196,23 @@
               <option value="half">Half Marathon</option>
               <option value="marathon" selected="selected">Marathon</option>
             </select>
-            <input
-              type="number"
-              name="distance-specify"
-              class="input"
-              data-field="distance"
-              placeholder="distance"
-              min="0"
-              step=".001"
-            />
-            <select name="distance-units" class="units" data-field="unit">
-              <option value="METER">meters</option>
-              <option value="KM">km</option>
-              <option value="MILE" selected="selected">miles</option>
-              <option value="YARD">yards</option>
-            </select>
+            <div class="distance-and-units">
+              <input
+                type="number"
+                name="distance-specify"
+                class="input"
+                data-field="distance"
+                placeholder="distance"
+                min="0"
+                step=".001"
+              />
+              <select name="distance-units" class="units" data-field="unit">
+                <option value="METER">meters</option>
+                <option value="KM">km</option>
+                <option value="MILE" selected="selected">miles</option>
+                <option value="YARD">yards</option>
+              </select>
+            </div>
           </div>
 
           <div class="pace" data-section="pace">
@@ -229,7 +226,7 @@
               placeholder="mm"
               pattern="\d*"
             />
-            :
+            <span>:</span>
             <input
               type="number"
               name="pace-seconds"
@@ -241,6 +238,7 @@
               placeholder="ss"
               pattern="\d*"
             />
+            <span>/</span>
             <select name="pace-units" class="units" data-field="unit">
               <option value="METER">meter</option>
               <option value="KM">km</option>
