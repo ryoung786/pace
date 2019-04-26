@@ -1,0 +1,36 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "cssnano": "^4.1.10",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.7.1",
+    "parcel-bundler": "^1.12.1",
+    "prettier": "^1.16.4",
+    "sass": "^1.18.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "deploy": "parcel build index.html -d pacebuild --public-url ./ && cp -r pacebuild ../ryoung786.github.io && pushd ../ryoung786.github.io && rm -r pace && mv pacebuild pace && git add pace && git ci -a -m \"pace deploy\" && git push && popd"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Firefox versions",
+    "last 2 FirefoxAndroid versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 2 Edge versions",
+    "last 2 Opera versions",
+    "last 2 OperaMobile versions"
+  ]
+}
